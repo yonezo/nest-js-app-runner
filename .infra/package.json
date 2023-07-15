@@ -1,0 +1,22 @@
+{
+  "name": "infra",
+  "version": "1.0.0",
+  "private": true,
+  "bin": {
+    "cdk": "bin/cdk.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-apprunner-alpha": "2.87.0-alpha.0",
+    "aws-cdk-lib": "^2.87.0"
+  },
+  "devDependencies": {
+    "aws-cdk": "^2.87.0",
+    "typescript": "^5.1.6"
+  }
+}

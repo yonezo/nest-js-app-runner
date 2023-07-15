@@ -1,0 +1,37 @@
+version: '3'
+services:
+  api:
+    image: yonezo/nest-js-app-runner:0.0.1
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: deploy
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+    env_file: .env
+    ports:
+      - 3000:3000 # <host port> : <container port>
+      - 9229:9229 # 9229 is the default node debug port
+    depends_on:
+      - db
+    # volumes:
+    #   - '/app/node_modules' # save the compiled node_modules to anonymous volume so make sure we don't attach the volume to our host node_modules
+    #   - './:/app' # link our project directory to the docker  directory so any change will get updated in the running container and also we will benefit from sourcemaps for debugging
+    # command: pnpm run start:debug # override entry command
+  db:
+    image: mysql:8.0
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE:
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_USER:
+      MYSQL_PASSWORD:
+      MYSQL_DATABASE:
+    volumes:
+      - mysql-volume:/var/lib/mysql
+
+volumes:
+  mysql-volume:
